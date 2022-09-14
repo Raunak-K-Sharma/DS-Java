@@ -1,5 +1,7 @@
 package compare;
 
+import java.util.Comparator;
+
 public class compareExample implements Comparable<compareExample> {
 
     private int size;
@@ -23,6 +25,15 @@ public class compareExample implements Comparable<compareExample> {
         else {
             return 0;
         }
+    }
+}
+
+class SizeComparator implements Comparator<compareExample> {
+
+
+    @Override
+    public int compare(compareExample o1, compareExample o2) {
+        return o1.getSize() - o2.getSize();
     }
 }
 
