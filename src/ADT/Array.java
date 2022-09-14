@@ -112,6 +112,17 @@ public class Array<T>  implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<T>() {
+            int index = 0;
+            @Override
+            public boolean hasNext() {
+                return index < len;
+            }
+
+            @Override
+            public T next() {
+                return arr[index++];
+            }
+        };
     }
 }
