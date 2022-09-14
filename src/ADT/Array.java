@@ -87,6 +87,16 @@ public class Array<T>  implements Iterable<T> {
 
     }
 
+    public boolean remove(Object element){
+        for (int i = 0; i < this.len; i++){
+            if(arr[i].equals(element)){
+                removeAt(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public Iterator<T> iterator() {
