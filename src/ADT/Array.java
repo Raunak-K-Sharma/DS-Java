@@ -125,4 +125,13 @@ public class Array<T>  implements Iterable<T> {
             }
         };
     }
+
+    @Override
+    public String toString() {
+        return "Array{" +
+                "arr=" + Arrays.toString(arr) +
+                ", len=" + len +
+                ", capacity=" + capacity +
+                '}';
+    }
 }
