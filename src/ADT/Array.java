@@ -3,6 +3,7 @@ package ADT;
 import java.util.Arrays;
 import java.util.Iterator;
 
+@SuppressWarnings("unchecked")
 public class Array<T>  implements Iterable<T> {
 
     private T [] arr;
@@ -40,6 +41,30 @@ public class Array<T>  implements Iterable<T> {
     public void clear(){
         Arrays.fill(arr, null);
         this.len = 0;
+    }
+
+    // adds a new elements to dynamic array
+    public void add(T element){
+        //Time to resize
+        if(this.len + 1 >= this.capacity){
+            if(this.capacity == 0){
+                this.capacity = 1;
+            }else{
+                //double the size
+                this.capacity *= 2;
+            }
+
+            T[] newArr = (T[]) new Object[this.capacity];
+            //copy the elements from previous array to this double sized array
+            for( int i = 0; i < this.len; i ++){
+                newArr[i] = arr[i];
+            }
+            //array will have extra nulls padded
+            arr = newArr;
+
+        }
+
+        arr[this.len + 1] = element;
     }
 
 
