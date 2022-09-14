@@ -97,6 +97,14 @@ public class Array<T>  implements Iterable<T> {
         return false;
     }
 
+    public int getIndexOf(Object element){
+        for (int i = 0; i < this.len; i++) {
+            if(arr[i].equals(element))
+                return i;
+        }
+        return -1;
+    }
+
 
     @Override
     public Iterator<T> iterator() {
