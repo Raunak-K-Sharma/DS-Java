@@ -105,6 +105,10 @@ public class Array<T>  implements Iterable<T> {
         return -1;
     }
 
+    public boolean contains(Object element){
+        return getIndexOf(element) != -1;
+    }
+
 
     @Override
     public Iterator<T> iterator() {
