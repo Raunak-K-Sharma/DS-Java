@@ -56,15 +56,35 @@ public class Array<T>  implements Iterable<T> {
 
             T[] newArr = (T[]) new Object[this.capacity];
             //copy the elements from previous array to this double sized array
-            for( int i = 0; i < this.len; i ++){
-                newArr[i] = arr[i];
-            }
+            if (this.len >= 0) System.arraycopy(arr, 0, newArr, 0, this.len);
             //array will have extra nulls padded
             arr = newArr;
 
         }
 
         arr[this.len + 1] = element;
+    }
+
+    // Removes the element present at particular index
+    public T removeAt(int removeIndex){
+        if(removeIndex >= this.len || removeIndex < 0){
+            throw new IndexOutOfBoundsException();
+        }
+        T removedElementData = arr[removeIndex];
+        T[] newArr = (T[]) new Object[this.len-1];
+        for(int i = 0, j= 0; i < len ; i++,j++ ){
+            //skip over the removedItem index
+            if(i == removeIndex){
+                j -= 1;
+            }else{
+                newArr[j] = arr[i];
+            }
+        }
+        arr = newArr;
+        this.len -= 1;
+        this.capacity = this.len;
+        return removedElementData;
+
     }
 
 
