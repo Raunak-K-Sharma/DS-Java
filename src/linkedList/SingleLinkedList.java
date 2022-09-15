@@ -17,10 +17,42 @@ public class SingleLinkedList<T> implements Iterable<T> {
 
     //clear the entire linked list
     public void clear(){
+        Node<T> traverse = head;
+        while(traverse != null){
+            Node<T> next = traverse.next;
+            traverse.next = null;
+            traverse.data = null;
+            traverse = next;
+        }
+
+        head = null;
+        size = 0;
 
     }
 
-    public static void addNode(Object element){
+    //returns size of linked list
+    public int size() {
+        return this.size;
+    }
+
+    //checks whether linked list is empty?
+    public boolean isEmpty(){
+        return this.size() == 0;
+    }
+
+    // adds an element to start of linked list
+    public void addFirst(T element){
+        if(this.isEmpty()){
+            head = new Node<>(element);
+        }else{
+            Node<T> newNode = new Node<>(element);
+            newNode.next = head;
+            head = newNode;
+        }
+    }
+
+    //add element to last of linked list
+    public void addLast(T element){
 
     }
 
