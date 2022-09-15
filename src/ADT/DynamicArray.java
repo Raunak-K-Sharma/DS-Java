@@ -3,12 +3,42 @@ package ADT;
 import java.util.Arrays;
 import java.util.Iterator;
 
+
+public class DynamicArray {
+    public static void main(String[] args) {
+        Array<Integer> dynamicArray = new Array<>();
+        System.out.println(dynamicArray);
+        System.out.println(dynamicArray.size());
+        dynamicArray.set(2,44);
+        System.out.println(dynamicArray);
+        System.out.println(dynamicArray.get(2));
+        System.out.println(dynamicArray.isEmpty());
+        dynamicArray.clear();
+        System.out.println(dynamicArray);
+        dynamicArray.add(14);
+        System.out.println(dynamicArray);
+        dynamicArray.add(15);
+        dynamicArray.add(19);
+        dynamicArray.add(1);
+        dynamicArray.add(15);
+        System.out.println(dynamicArray);
+        System.out.println(dynamicArray.remove(15));
+        System.out.println(dynamicArray);
+        dynamicArray.add(23);
+        System.out.println(dynamicArray);
+        System.out.println(dynamicArray.removeAt(1));
+        System.out.println(dynamicArray);
+        System.out.println(dynamicArray.contains(34));
+
+    }
+
+}
 @SuppressWarnings("unchecked")
-public class Array<T>  implements Iterable<T> {
+class Array<T>  implements Iterable<T> {
 
     private T [] arr;
     private int len = 0; //length user thinks array is
-    private int capacity = 0; //length actually array is
+    private int capacity; //length actually array is
 
     public Array(){
         this(16);
@@ -36,6 +66,7 @@ public class Array<T>  implements Iterable<T> {
 
     public void set(int index, T element){
         arr[index] = element;
+        this.len += 1;
     }
 
     public void clear(){
@@ -62,7 +93,8 @@ public class Array<T>  implements Iterable<T> {
 
         }
 
-        arr[this.len + 1] = element;
+        arr[this.len] = element;
+        this.len += 1;
     }
 
     // Removes the element present at particular index
@@ -90,7 +122,8 @@ public class Array<T>  implements Iterable<T> {
     public boolean remove(Object element){
         for (int i = 0; i < this.len; i++){
             if(arr[i].equals(element)){
-                removeAt(i);
+                T result = removeAt(i);
+                System.out.println(result);
                 return true;
             }
         }
@@ -112,7 +145,7 @@ public class Array<T>  implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             int index = 0;
             @Override
             public boolean hasNext() {
