@@ -6,7 +6,6 @@ public class SingleLinkedList<T> implements Iterable<T> {
 
     private int size = 0;
     private Node<T> head = null;
-    private Node<T> tail = null;
     public static void main(String[] args) {
 
     }
@@ -40,6 +39,11 @@ public class SingleLinkedList<T> implements Iterable<T> {
         return this.size() == 0;
     }
 
+    //adds element to linked list
+    public void add(T element){
+       this.addLast(element);
+    }
+
     // adds an element to start of linked list
     public void addFirst(T element){
         if(this.isEmpty()){
@@ -49,13 +53,22 @@ public class SingleLinkedList<T> implements Iterable<T> {
             newNode.next = head;
             head = newNode;
         }
+        this.size += 1;
     }
 
     //add element to last of linked list
-    public void addLast(T element){
-
+    public void addLast(T element) {
+        if (isEmpty()) {
+            head = new Node<>(element);
+        } else {
+            Node<T> traverse = head;
+            while (traverse.next != null) {
+                traverse = traverse.next;
+            }
+            traverse.next = new Node<>(element);
+        }
+        this.size += 1;
     }
-
 
     @Override
     public Iterator<T> iterator() {
