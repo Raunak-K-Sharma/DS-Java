@@ -22,6 +22,8 @@ public class SingleLinkedList<T> implements Iterable<T> {
             testList.addAtPosition(34,2);
             testList.addAtPosition(84,2);
             testList.printList();
+            System.out.println(testList.removeFirst());
+            testList.printList();
     }
 
     public SingleLinkedList(){
@@ -124,6 +126,20 @@ public class SingleLinkedList<T> implements Iterable<T> {
             }
 
         }
+    }
+
+    public T removeFirst(){
+        if(this.isEmpty()){
+            System.out.println("List is Empty");
+            return null;
+        }else{
+            Node<T> removedNode = head;
+            head = head.next;
+            this.size -= 1;
+            removedNode.next = null;
+            return removedNode.data;
+        }
+
     }
 
     @Override
