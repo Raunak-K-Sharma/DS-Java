@@ -121,6 +121,7 @@ public class SingleLinkedList<T> implements Iterable<T> {
                     Node<T> newNode = new Node<>(element);
                     newNode.next = traverse.next;
                     traverse.next = newNode;
+                    this.size += 1;
                     break;
                 }
                 traverse = traverse.next;
@@ -159,6 +160,42 @@ public class SingleLinkedList<T> implements Iterable<T> {
 
         }
 
+    }
+
+    public T removeFromPosition(int position){
+        int indexToRemove = position -1;
+
+        if (isEmpty()){
+            System.out.println("List is Empty");
+            return null;
+        } else if (indexToRemove > this.size()) {
+            System.out.println("Position out of Range");
+            return null;
+        }else  if(indexToRemove == this.size()){
+            return removeLast();
+        } else if (indexToRemove == 0) {
+            return removeFirst();
+        }
+        else{
+            int countIndex = 0;
+            Node<T> traverse = head;
+            Node<T> prev= head;
+            Node<T> removedNode = null;
+            while(traverse.next != null){
+
+                if(countIndex == indexToRemove){
+                    removedNode = traverse;
+                    prev.next = traverse.next;
+                    traverse.next = null;
+                    this.size -= 1;
+                    break;
+                }
+                prev = traverse;
+                traverse = traverse.next;
+                countIndex += 1;
+            }
+            return removedNode != null ? removedNode.data : null;
+        }
     }
 
     @Override
