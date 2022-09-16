@@ -7,7 +7,25 @@ public class SingleLinkedList<T> implements Iterable<T> {
     private int size = 0;
     private Node<T> head = null;
     public static void main(String[] args) {
-
+            SingleLinkedList<Integer> testList = new SingleLinkedList<>();
+            testList.addLast(1);
+            testList.add(3);
+            testList.printList();
+            testList.addFirst(34);
+            testList.printList();
+            testList.clear();
+            testList.printList();
+            testList.addAtPosition(12,2);
+            System.out.println(testList.isEmpty());
+            testList.addAtPosition(12,1);
+            testList.addAtPosition(24,2);
+            testList.addAtPosition(34,2);
+            testList.addAtPosition(84,2);
+            testList.printList();
+            System.out.println(testList.removeFirst());
+            testList.printList();
+            System.out.println(testList.removeLast());
+            testList.printList();
     }
 
     public SingleLinkedList(){
@@ -68,6 +86,79 @@ public class SingleLinkedList<T> implements Iterable<T> {
             traverse.next = new Node<>(element);
         }
         this.size += 1;
+    }
+
+    public void printList(){
+
+        if(isEmpty()){
+            System.out.println("List is Empty");
+        }
+        else{
+            Node<T> traverse = head;
+            while(traverse.next != null){
+                System.out.print(traverse.data);
+                System.out.print("->");
+                traverse = traverse.next;
+            }
+            System.out.println(traverse.data);
+        }
+    }
+
+    public void addAtPosition(T element, int position)
+    {
+        int indexToInsert = position - 1;
+        if(indexToInsert > this.size()){
+            System.out.println("position not present in list");
+        }
+        else if (indexToInsert == this.size()){
+            addLast(element);
+        }else{
+            int countIndex = 0;
+            Node<T> traverse = head;
+            while(traverse != null){
+
+                if(countIndex == indexToInsert){
+                    Node<T> newNode = new Node<>(element);
+                    newNode.next = traverse.next;
+                    traverse.next = newNode;
+                    break;
+                }
+                traverse = traverse.next;
+                countIndex += 1;
+            }
+
+        }
+    }
+
+    public T removeFirst(){
+        if(this.isEmpty()){
+            System.out.println("List is Empty");
+            return null;
+        }else{
+            Node<T> removedNode = head;
+            head = head.next;
+            this.size -= 1;
+            removedNode.next = null;
+            return removedNode.data;
+        }
+
+    }
+    public T removeLast() {
+        if (isEmpty()) {
+            System.out.println("Empty List");
+            return null;
+        } else {
+            Node<T> traverse = head;
+            while (traverse.next.next!= null) {
+                traverse = traverse.next;
+            }
+            Node<T> removedNode = traverse.next;
+            traverse.next = null;
+            this.size += 1;
+            return removedNode.data;
+
+        }
+
     }
 
     @Override
