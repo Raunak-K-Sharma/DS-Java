@@ -13,6 +13,8 @@ public class SingleLinkedList<T> implements Iterable<T> {
             testList.printList();
             testList.addFirst(34);
             testList.printList();
+            testList.clear();
+            testList.printList();
     }
 
     public SingleLinkedList(){
@@ -76,13 +78,21 @@ public class SingleLinkedList<T> implements Iterable<T> {
     }
 
     public void printList(){
-        Node<T> traverse = head;
-        while(traverse.next != null){
-            System.out.print(traverse.data);
-            System.out.print("->");
-            traverse = traverse.next;
+
+        if(isEmpty()){
+            System.out.println("List is Empty");
         }
-        System.out.println(traverse.data);
+        else{
+            Node<T> traverse = head;
+            while(traverse.next != null){
+                System.out.print(traverse.data);
+                System.out.print("->");
+                traverse = traverse.next;
+            }
+            System.out.println(traverse.data);
+        }
+
+
     }
 
     @Override
