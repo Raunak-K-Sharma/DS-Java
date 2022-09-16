@@ -24,6 +24,8 @@ public class SingleLinkedList<T> implements Iterable<T> {
             testList.printList();
             System.out.println(testList.removeFirst());
             testList.printList();
+            System.out.println(testList.removeLast());
+            testList.printList();
     }
 
     public SingleLinkedList(){
@@ -138,6 +140,23 @@ public class SingleLinkedList<T> implements Iterable<T> {
             this.size -= 1;
             removedNode.next = null;
             return removedNode.data;
+        }
+
+    }
+    public T removeLast() {
+        if (isEmpty()) {
+            System.out.println("Empty List");
+            return null;
+        } else {
+            Node<T> traverse = head;
+            while (traverse.next.next!= null) {
+                traverse = traverse.next;
+            }
+            Node<T> removedNode = traverse.next;
+            traverse.next = null;
+            this.size += 1;
+            return removedNode.data;
+
         }
 
     }
