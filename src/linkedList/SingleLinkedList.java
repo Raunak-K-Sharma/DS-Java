@@ -7,37 +7,44 @@ public class SingleLinkedList<T> implements Iterable<T> {
     private int size = 0;
     private Node<T> head = null;
     public static void main(String[] args) {
-            SingleLinkedList<Integer> testList = new SingleLinkedList<>();
-            //check add last
-            testList.addLast(1);
-            testList.add(3);
-            //prints list
-            testList.printList();
-            //check add first
-            testList.addFirst(34);
-            testList.printList();
-            //check empty
-            testList.clear();
-            testList.printList();
-            // add at a particular position
-            testList.addAtPosition(12,2);
-            System.out.println(testList.isEmpty());
-            testList.addAtPosition(12,1);
-            testList.addAtPosition(24,2);
-            testList.addAtPosition(34,2);
-            testList.addAtPosition(84,2);
-            testList.printList();
-            //remove First
-            System.out.println(testList.removeFirst());
-            testList.printList();
-            // remove last
-            System.out.println(testList.removeLast());
-            testList.printList();
-            // add to check remove at position
-            testList.add(13);
-            testList.add(23);
-            testList.add(14);
-            testList.printList();
+        SingleLinkedList<Integer> testList = new SingleLinkedList<>();
+        //check add last
+        testList.addLast(1);
+        testList.add(3);
+        //prints list
+        testList.printList();
+        //check add first
+        testList.addFirst(34);
+        testList.printList();
+        //check empty
+        testList.clear();
+        testList.printList();
+        // add at a particular position
+        testList.addAtPosition(12,2);
+        System.out.println(testList.isEmpty());
+        testList.addAtPosition(12,1);
+        testList.addAtPosition(24,2);
+        testList.addAtPosition(34,2);
+        testList.addAtPosition(84,2);
+        testList.printList();
+        //remove First
+        System.out.println(testList.removeFirst());
+        testList.printList();
+        // remove last
+        System.out.println(testList.removeLast());
+        testList.printList();
+        // add to check remove at position
+        testList.add(13);
+        testList.add(23);
+        testList.add(14);
+        testList.printList();
+        testList.removeFromPosition(1);
+        testList.printList();
+        System.out.println(testList.removeFromPosition(testList.size));
+        testList.printList();
+        System.out.println(testList.removeFromPosition(2));
+        testList.printList();
+
     }
 
     public SingleLinkedList(){
@@ -180,10 +187,10 @@ public class SingleLinkedList<T> implements Iterable<T> {
         if (isEmpty()){
             System.out.println("List is Empty");
             return null;
-        } else if (indexToRemove > this.size()) {
+        } else if (indexToRemove >= this.size()) {
             System.out.println("Position out of Range");
             return null;
-        }else  if(indexToRemove == this.size()){
+        }else  if(indexToRemove == this.size()-1){
             return removeLast();
         } else if (indexToRemove == 0) {
             return removeFirst();
