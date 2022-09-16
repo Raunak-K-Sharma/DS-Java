@@ -7,25 +7,44 @@ public class SingleLinkedList<T> implements Iterable<T> {
     private int size = 0;
     private Node<T> head = null;
     public static void main(String[] args) {
-            SingleLinkedList<Integer> testList = new SingleLinkedList<>();
-            testList.addLast(1);
-            testList.add(3);
-            testList.printList();
-            testList.addFirst(34);
-            testList.printList();
-            testList.clear();
-            testList.printList();
-            testList.addAtPosition(12,2);
-            System.out.println(testList.isEmpty());
-            testList.addAtPosition(12,1);
-            testList.addAtPosition(24,2);
-            testList.addAtPosition(34,2);
-            testList.addAtPosition(84,2);
-            testList.printList();
-            System.out.println(testList.removeFirst());
-            testList.printList();
-            System.out.println(testList.removeLast());
-            testList.printList();
+        SingleLinkedList<Integer> testList = new SingleLinkedList<>();
+        //check add last
+        testList.addLast(1);
+        testList.add(3);
+        //prints list
+        testList.printList();
+        //check add first
+        testList.addFirst(34);
+        testList.printList();
+        //check empty
+        testList.clear();
+        testList.printList();
+        // add at a particular position
+        testList.addAtPosition(12,2);
+        System.out.println(testList.isEmpty());
+        testList.addAtPosition(12,1);
+        testList.addAtPosition(24,2);
+        testList.addAtPosition(34,2);
+        testList.addAtPosition(84,2);
+        testList.printList();
+        //remove First
+        System.out.println(testList.removeFirst());
+        testList.printList();
+        // remove last
+        System.out.println(testList.removeLast());
+        testList.printList();
+        // add to check remove at position
+        testList.add(13);
+        testList.add(23);
+        testList.add(14);
+        testList.printList();
+        testList.removeFromPosition(1);
+        testList.printList();
+        System.out.println(testList.removeFromPosition(testList.size));
+        testList.printList();
+        System.out.println(testList.removeFromPosition(2));
+        testList.printList();
+
     }
 
     public SingleLinkedList(){
@@ -121,6 +140,7 @@ public class SingleLinkedList<T> implements Iterable<T> {
                     Node<T> newNode = new Node<>(element);
                     newNode.next = traverse.next;
                     traverse.next = newNode;
+                    this.size += 1;
                     break;
                 }
                 traverse = traverse.next;
@@ -159,6 +179,42 @@ public class SingleLinkedList<T> implements Iterable<T> {
 
         }
 
+    }
+
+    public T removeFromPosition(int position){
+        int indexToRemove = position -1;
+
+        if (isEmpty()){
+            System.out.println("List is Empty");
+            return null;
+        } else if (indexToRemove >= this.size()) {
+            System.out.println("Position out of Range");
+            return null;
+        }else  if(indexToRemove == this.size()-1){
+            return removeLast();
+        } else if (indexToRemove == 0) {
+            return removeFirst();
+        }
+        else{
+            int countIndex = 0;
+            Node<T> traverse = head;
+            Node<T> prev= head;
+            Node<T> removedNode = null;
+            while(traverse.next != null){
+
+                if(countIndex == indexToRemove){
+                    removedNode = traverse;
+                    prev.next = traverse.next;
+                    traverse.next = null;
+                    this.size -= 1;
+                    break;
+                }
+                prev = traverse;
+                traverse = traverse.next;
+                countIndex += 1;
+            }
+            return removedNode != null ? removedNode.data : null;
+        }
     }
 
     @Override
