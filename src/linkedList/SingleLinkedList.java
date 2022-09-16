@@ -8,13 +8,18 @@ public class SingleLinkedList<T> implements Iterable<T> {
     private Node<T> head = null;
     public static void main(String[] args) {
             SingleLinkedList<Integer> testList = new SingleLinkedList<>();
+            //check add last
             testList.addLast(1);
             testList.add(3);
+            //prints list
             testList.printList();
+            //check add first
             testList.addFirst(34);
             testList.printList();
+            //check empty
             testList.clear();
             testList.printList();
+            // add at a particular position
             testList.addAtPosition(12,2);
             System.out.println(testList.isEmpty());
             testList.addAtPosition(12,1);
@@ -22,9 +27,16 @@ public class SingleLinkedList<T> implements Iterable<T> {
             testList.addAtPosition(34,2);
             testList.addAtPosition(84,2);
             testList.printList();
+            //remove First
             System.out.println(testList.removeFirst());
             testList.printList();
+            // remove last
             System.out.println(testList.removeLast());
+            testList.printList();
+            // add to check remove at position
+            testList.add(13);
+            testList.add(23);
+            testList.add(14);
             testList.printList();
     }
 
