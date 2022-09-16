@@ -7,7 +7,12 @@ public class SingleLinkedList<T> implements Iterable<T> {
     private int size = 0;
     private Node<T> head = null;
     public static void main(String[] args) {
-
+            SingleLinkedList<Integer> testList = new SingleLinkedList<>();
+            testList.addLast(1);
+            testList.add(3);
+            testList.printList();
+            testList.addFirst(34);
+            testList.printList();
     }
 
     public SingleLinkedList(){
@@ -68,6 +73,16 @@ public class SingleLinkedList<T> implements Iterable<T> {
             traverse.next = new Node<>(element);
         }
         this.size += 1;
+    }
+
+    public void printList(){
+        Node<T> traverse = head;
+        while(traverse.next != null){
+            System.out.print(traverse.data);
+            System.out.print("->");
+            traverse = traverse.next;
+        }
+        System.out.println(traverse.data);
     }
 
     @Override
