@@ -15,6 +15,13 @@ public class SingleLinkedList<T> implements Iterable<T> {
             testList.printList();
             testList.clear();
             testList.printList();
+            testList.addAtPosition(12,2);
+            System.out.println(testList.isEmpty());
+            testList.addAtPosition(12,1);
+            testList.addAtPosition(24,2);
+            testList.addAtPosition(34,2);
+            testList.addAtPosition(84,2);
+            testList.printList();
     }
 
     public SingleLinkedList(){
@@ -91,8 +98,32 @@ public class SingleLinkedList<T> implements Iterable<T> {
             }
             System.out.println(traverse.data);
         }
+    }
 
+    public void addAtPosition(T element, int position)
+    {
+        int indexToInsert = position - 1;
+        if(indexToInsert > this.size()){
+            System.out.println("position not present in list");
+        }
+        else if (indexToInsert == this.size()){
+            addLast(element);
+        }else{
+            int countIndex = 0;
+            Node<T> traverse = head;
+            while(traverse != null){
 
+                if(countIndex == indexToInsert){
+                    Node<T> newNode = new Node<>(element);
+                    newNode.next = traverse.next;
+                    traverse.next = newNode;
+                    break;
+                }
+                traverse = traverse.next;
+                countIndex += 1;
+            }
+
+        }
     }
 
     @Override
