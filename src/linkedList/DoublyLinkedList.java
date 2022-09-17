@@ -20,6 +20,10 @@ public class DoublyLinkedList<T> implements Iterable<T> {
             System.out.println(doublyLinkedList.getSize());
             doublyLinkedList.clear();
             doublyLinkedList.printList();
+            doublyLinkedList.addLast(12);
+            doublyLinkedList.addLast(14);
+            doublyLinkedList.addLast(34);
+            doublyLinkedList.printList();
     }
 
     //Empty the doublu linked list
@@ -58,6 +62,25 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         this.size += 1;
     }
 
+    // adds to the last of the list
+    public void addLast(T element){
+        if (this.isEmpty()){
+            addFirst(element);
+        }
+        else{
+            Node<T> traverse = head;
+            //traverse till the last element
+            while(traverse.next != null){
+                traverse = traverse.next;
+            }
+            Node<T> newNode = new Node<>(element);
+            traverse.next = newNode;
+            newNode.prev = traverse;
+            newNode.next = null;
+        }
+        this.size += 1;
+    }
+
     public void printList(){
         if(this.isEmpty()){
             System.out.println("List is Empty");
@@ -66,7 +89,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
             Node<T> traverse = head;
             while(traverse.next != null){
                 System.out.print(traverse.data);
-                System.out.print("->");
+                System.out.print("<->");
                 traverse = traverse.next;
             }
             System.out.println(traverse.data);
