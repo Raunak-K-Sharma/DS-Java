@@ -71,7 +71,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     public void addFirst(T element){
         if(this.isEmpty()){
-            head = new Node<>(element);
+            head = tail =  new Node<>(element);
         }else{
             Node<T> newNode = new Node<>(element);
             newNode.next = head;
@@ -87,6 +87,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
             addFirst(element);
         }
         else{
+            /* this will take O(n) time
             Node<T> traverse = head;
             //traverse till the last element
             while(traverse.next != null){
@@ -97,6 +98,15 @@ public class DoublyLinkedList<T> implements Iterable<T> {
             newNode.prev = traverse;
             newNode.next = null;
             this.size += 1;
+            */
+            // we will use tail pointer to add to last to do it in
+            // O(1)
+            Node<T> newNode = new Node<>(element);
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
+            this.size += 1;
+
         }
     }
 
@@ -151,8 +161,16 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         Node<T> removedNode = head;
         head  = head.next;
         head.prev = null;
+        T data = removedNode.data;
+        // grabage collection
         removedNode.next = null;
-        return removedNode.data;
+        removedNode.prev = null;
+        removedNode.data = null;
+        return data;
+    }
+
+    public T removeLast(){
+        return null;
     }
 
     @Override
