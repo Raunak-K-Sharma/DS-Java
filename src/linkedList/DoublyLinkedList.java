@@ -12,31 +12,41 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
 
     public static void main(String[] args) {
-            DoublyLinkedList<Integer> doublyLinkedList =
-                    new DoublyLinkedList<>();
-            // adding at first
-            doublyLinkedList.addFirst(12);
-            doublyLinkedList.addFirst(14);
-            doublyLinkedList.printList();
-            doublyLinkedList.clear();
-            System.out.println(doublyLinkedList.getSize());
-            doublyLinkedList.printList();
-            // adding at last
-            doublyLinkedList.addLast(12);
-            doublyLinkedList.addLast(14);
-            doublyLinkedList.addLast(34);
-            doublyLinkedList.printList();
+        DoublyLinkedList<Integer> doublyLinkedList =
+                new DoublyLinkedList<>();
+        // adding at first
+        doublyLinkedList.addFirst(12);
+        doublyLinkedList.addFirst(14);
+        doublyLinkedList.printList();
+        doublyLinkedList.clear();
+        System.out.println(doublyLinkedList.getSize());
+        doublyLinkedList.printList();
+        // adding at last
+        doublyLinkedList.addLast(12);
+        doublyLinkedList.addLast(14);
+        doublyLinkedList.addLast(34);
+        doublyLinkedList.printList();
 
-            // testing add at different positions
-            doublyLinkedList.addAtPosition(23,2);
-            // adding at start
-            doublyLinkedList.addAtPosition(45,1);
-            //adding just preious last
-            doublyLinkedList.addAtPosition(67, doublyLinkedList.getSize());
-            //adding at last
-            doublyLinkedList.addAtPosition(88,
-                    doublyLinkedList.getSize() + 1);
-            doublyLinkedList.printList();
+        // testing add at different positions
+        doublyLinkedList.addAtPosition(23,2);
+        // adding at start
+        doublyLinkedList.addAtPosition(45,1);
+        //adding just preious last
+        doublyLinkedList.addAtPosition(67, doublyLinkedList.getSize());
+        //adding at last
+        doublyLinkedList.addAtPosition(88,
+                doublyLinkedList.getSize() + 1);
+        doublyLinkedList.printList();
+
+        //check for removal from list
+        System.out.println(doublyLinkedList.removeFirst());
+        doublyLinkedList.printList();
+
+        // check for removal from last
+        System.out.println(doublyLinkedList.removeLast());
+        doublyLinkedList.printList();
+
+
     }
 
     //Empty the doublu linked list
@@ -65,7 +75,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     public void addFirst(T element){
         if(this.isEmpty()){
-            head = new Node<>(element);
+            head = tail =  new Node<>(element);
         }else{
             Node<T> newNode = new Node<>(element);
             newNode.next = head;
@@ -81,6 +91,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
             addFirst(element);
         }
         else{
+            /* this will take O(n) time
             Node<T> traverse = head;
             //traverse till the last element
             while(traverse.next != null){
@@ -91,6 +102,15 @@ public class DoublyLinkedList<T> implements Iterable<T> {
             newNode.prev = traverse;
             newNode.next = null;
             this.size += 1;
+            */
+            // we will use tail pointer to add to last to do it in
+            // O(1)
+            Node<T> newNode = new Node<>(element);
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
+            this.size += 1;
+
         }
     }
 
@@ -136,9 +156,55 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         }
     }
 
+    //removes from start of the list
+    public T removeFirst(){
+        if (this.isEmpty()){
+            System.out.println("List Is Empty");
+            return null;
+        }
+        Node<T> removedNode = head;
+        head  = head.next;
+        head.prev = null;
+        T data = removedNode.data;
+        this.size -= 1;
+        // grabage collection
+        removedNode.next = null;
+        removedNode.prev = null;
+        removedNode.data = null;
+        return data;
+    }
+
+    public T removeLast(){
+        if (this.isEmpty()){
+            System.out.println("List Is Empty");
+            return null;
+        }
+        Node<T> removedNode = tail;
+        tail = tail.prev;
+        tail.next = null;
+        T data = removedNode.data;
+        this.size -= 1;
+        // garbage collection
+        removedNode = null;
+        return data;
+    }
+
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<T>() {
+            Node<T> traverse = head;
+            @Override
+            public boolean hasNext() {
+                return traverse != null;
+            }
+
+            @Override
+            public T next() {
+                T data = traverse.data;
+                traverse = traverse.next;
+                return data;
+            }
+        };
     }
 
     //internal node class to form a doubly linked list Node

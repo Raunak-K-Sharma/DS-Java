@@ -219,7 +219,20 @@ public class SingleLinkedList<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<>() {
+            Node<T> traverse = head;
+            @Override
+            public boolean hasNext() {
+                return traverse != null;
+            }
+
+            @Override
+            public T next() {
+                T data = traverse.data;
+                traverse = traverse.next;
+                return data;
+            }
+        };
     }
 }
 
