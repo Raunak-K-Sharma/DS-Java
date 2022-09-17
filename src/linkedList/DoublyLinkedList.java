@@ -175,7 +175,20 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<T>() {
+            Node<T> traverse = head;
+            @Override
+            public boolean hasNext() {
+                return traverse != null;
+            }
+
+            @Override
+            public T next() {
+                T data = traverse.data;
+                traverse = traverse.next;
+                return data;
+            }
+        };
     }
 
     //internal node class to form a doubly linked list Node
