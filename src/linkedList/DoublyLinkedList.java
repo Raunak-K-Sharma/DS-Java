@@ -18,6 +18,8 @@ public class DoublyLinkedList<T> implements Iterable<T> {
             doublyLinkedList.addFirst(14);
             doublyLinkedList.printList();
             System.out.println(doublyLinkedList.getSize());
+            doublyLinkedList.clear();
+            doublyLinkedList.printList();
     }
 
     //Empty the doublu linked list
