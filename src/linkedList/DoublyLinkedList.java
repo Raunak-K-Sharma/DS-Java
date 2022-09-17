@@ -29,6 +29,16 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     }
 
+    //returns size of the linked list
+    public int getSize(){
+        return size;
+    }
+
+    //returns whether the linked list is Empty or not
+    public boolean isEmpty(){
+        return this.getSize() == 0;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return null;
