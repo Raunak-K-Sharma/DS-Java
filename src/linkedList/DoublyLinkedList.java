@@ -42,6 +42,10 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         System.out.println(doublyLinkedList.removeFirst());
         doublyLinkedList.printList();
 
+        // check for removal from last
+        System.out.println(doublyLinkedList.removeLast());
+        doublyLinkedList.printList();
+
 
     }
 
@@ -162,6 +166,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         head  = head.next;
         head.prev = null;
         T data = removedNode.data;
+        this.size -= 1;
         // grabage collection
         removedNode.next = null;
         removedNode.prev = null;
@@ -170,7 +175,18 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     }
 
     public T removeLast(){
-        return null;
+        if (this.isEmpty()){
+            System.out.println("List Is Empty");
+            return null;
+        }
+        Node<T> removedNode = tail;
+        tail = tail.prev;
+        tail.next = null;
+        T data = removedNode.data;
+        this.size -= 1;
+        // garbage collection
+        removedNode = null;
+        return data;
     }
 
     @Override
