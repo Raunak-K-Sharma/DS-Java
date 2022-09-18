@@ -45,6 +45,8 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         // check for removal from last
         System.out.println(doublyLinkedList.removeLast());
         doublyLinkedList.printList();
+        System.out.println(doublyLinkedList.removeFromPosition(2));
+        doublyLinkedList.printList();
 
 
     }
@@ -75,7 +77,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     public void addFirst(T element){
         if(this.isEmpty()){
-            head = tail =  new Node<>(element);
+            head = tail = new Node<>(element);
         }else{
             Node<T> newNode = new Node<>(element);
             newNode.next = head;
@@ -130,8 +132,8 @@ public class DoublyLinkedList<T> implements Iterable<T> {
                     Node<T> newNode = new Node<>(element);
                     newNode.next = traverse;
                     traverse.prev.next = newNode;
-                    traverse.prev = newNode;
                     newNode.prev = traverse.prev;
+                    traverse.prev = newNode;
                     this.size += 1;
                     break;
                 }
@@ -184,14 +186,44 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         tail.next = null;
         T data = removedNode.data;
         this.size -= 1;
-        // garbage collection
-        removedNode = null;
         return data;
+    }
+
+    public T removeFromPosition(int position){
+        int indexToRemove = position -1;
+        if(indexToRemove > this.size){
+            System.out.println("position out of range");
+            return null;
+        } else if (indexToRemove == this.size) {
+            return removeLast();
+        } else if (indexToRemove == 0) {
+            return removeFirst();
+        }else{
+               int countIndex = 0;
+               Node<T> traverse = head;
+               Node<T> removedNode = null;
+               while(traverse != null){
+                   if(countIndex == indexToRemove){
+                       removedNode = traverse;
+                       traverse.next.prev = traverse.prev;
+                       traverse.prev.next = traverse.next;
+                       traverse.next = traverse.prev = null;
+                       break;
+                   }
+                   traverse = traverse.next;
+                   countIndex += 1;
+               }
+            T data = removedNode != null ? removedNode.data : null;
+            this.size -= 1;
+            // garbage cleaning
+
+            return data;
+        }
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             Node<T> traverse = head;
             @Override
             public boolean hasNext() {
@@ -208,7 +240,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     }
 
     //internal node class to form a doubly linked list Node
-    private class Node<T> {
+    private static class Node<T> {
         public T data;
         public Node<T> next;
         public Node<T> prev;
