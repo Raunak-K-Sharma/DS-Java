@@ -77,7 +77,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     public void addFirst(T element){
         if(this.isEmpty()){
-            head = tail =  new Node<>(element);
+            head = tail = new Node<>(element);
         }else{
             Node<T> newNode = new Node<>(element);
             newNode.next = head;
@@ -186,8 +186,6 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         tail.next = null;
         T data = removedNode.data;
         this.size -= 1;
-        // garbage collection
-        removedNode = null;
         return data;
     }
 
@@ -225,7 +223,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             Node<T> traverse = head;
             @Override
             public boolean hasNext() {
@@ -242,7 +240,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     }
 
     //internal node class to form a doubly linked list Node
-    private class Node<T> {
+    private static class Node<T> {
         public T data;
         public Node<T> next;
         public Node<T> prev;
