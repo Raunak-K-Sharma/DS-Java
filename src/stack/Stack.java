@@ -1,5 +1,6 @@
 package stack;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -23,6 +24,7 @@ public class Stack<T> implements Iterable<T> {
         System.out.println(stack.peek());
         System.out.println(stack.pop());
         System.out.println(stack.peek());
+        System.out.println(stack.isValid("()"));
 
 
         
@@ -74,4 +76,47 @@ public class Stack<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return stackBaseList.iterator();
     }
+
+    public boolean isValid(String s) {
+        LinkedList<Character> stackedLinkedList = new LinkedList<>();
+
+        ArrayList<Character> leftBrackets = new ArrayList<>();
+        leftBrackets.add('[');
+        leftBrackets.add('{');
+        leftBrackets.add('(');
+        for(Character character: s.toCharArray()) {
+            char rev  = getReverseBracket(character);
+
+            if(leftBrackets.contains(character)){
+                stackedLinkedList.addLast(character);
+            } else if (stackedLinkedList.isEmpty() || (stackedLinkedList.removeLast() != rev) ) {
+                return false;
+            }
+        }
+        return stackedLinkedList.isEmpty();
+
+    }
+
+    public Character getReverseBracket(Character bracket){
+        if( bracket == '['){
+            return ']';
+        }
+        else if( bracket == '{'){
+            return '}';
+        }
+        else if (bracket == '('){
+            return ')';
+        }
+        if( bracket == ']'){
+            return '[';
+        }
+        else if( bracket == '}'){
+            return '{';
+        }
+        else{
+            return '(';
+        }
+
+    }
+
 }
