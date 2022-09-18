@@ -13,6 +13,18 @@ public class Stack<T> implements Iterable<T> {
         System.out.println(stack.getSize());
         System.out.println(stack.isEmpty());
 
+        Stack<Integer> stackOne = new Stack<>(12);
+        // checking the base functions
+        System.out.println(stackOne.getSize());
+        System.out.println(stackOne.isEmpty());
+
+        stack.push(1);
+        stack.push(2);
+        System.out.println(stack.peek());
+        System.out.println(stack.pop());
+        System.out.println(stack.peek());
+
+
         
     }
 
