@@ -45,6 +45,8 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         // check for removal from last
         System.out.println(doublyLinkedList.removeLast());
         doublyLinkedList.printList();
+        System.out.println(doublyLinkedList.removeFromPosition(2));
+        doublyLinkedList.printList();
 
 
     }
@@ -130,8 +132,8 @@ public class DoublyLinkedList<T> implements Iterable<T> {
                     Node<T> newNode = new Node<>(element);
                     newNode.next = traverse;
                     traverse.prev.next = newNode;
-                    traverse.prev = newNode;
                     newNode.prev = traverse.prev;
+                    traverse.prev = newNode;
                     this.size += 1;
                     break;
                 }
@@ -187,6 +189,38 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         // garbage collection
         removedNode = null;
         return data;
+    }
+
+    public T removeFromPosition(int position){
+        int indexToRemove = position -1;
+        if(indexToRemove > this.size){
+            System.out.println("position out of range");
+            return null;
+        } else if (indexToRemove == this.size) {
+            return removeLast();
+        } else if (indexToRemove == 0) {
+            return removeFirst();
+        }else{
+               int countIndex = 0;
+               Node<T> traverse = head;
+               Node<T> removedNode = null;
+               while(traverse != null){
+                   if(countIndex == indexToRemove){
+                       removedNode = traverse;
+                       traverse.next.prev = traverse.prev;
+                       traverse.prev.next = traverse.next;
+                       traverse.next = traverse.prev = null;
+                       break;
+                   }
+                   traverse = traverse.next;
+                   countIndex += 1;
+               }
+            T data = removedNode != null ? removedNode.data : null;
+            this.size -= 1;
+            // garbage cleaning
+
+            return data;
+        }
     }
 
     @Override
