@@ -6,9 +6,18 @@ import java.util.LinkedList;
 // implementing a Queue using a linked list
 public class Queue<T> implements Iterable<T> {
 
-    private LinkedList<T> linkedListBasedQueue = new LinkedList<>();
+    private final LinkedList<T> linkedListBasedQueue = new LinkedList<>();
 
     public static void main(String[] args) {
+        Queue<Integer> queue = new Queue<>();
+        //checks for basic working queue
+        System.out.println(queue.size());
+        System.out.println(queue.isEmpty());
+
+        Queue<Integer> queueOne = new Queue<>(12);
+        //checks for basic working queue
+        System.out.println(queueOne.size());
+        System.out.println(queueOne.isEmpty());
 
     }
 
