@@ -19,6 +19,15 @@ public class Queue<T> implements Iterable<T> {
         System.out.println(queueOne.size());
         System.out.println(queueOne.isEmpty());
 
+        // implementation checks
+        queueOne.enqueue(14);
+        queueOne.enqueue(23);
+        queueOne.enqueue(34);
+        System.out.println(queueOne.size());
+        System.out.println(queueOne.peek());
+        System.out.println(queueOne.dequeue());
+        System.out.println(queueOne.peek());
+
     }
 
     // normal constructor
@@ -47,7 +56,7 @@ public class Queue<T> implements Iterable<T> {
     }
 
     //removes the element from start of the queue
-    public T dequeue(T element){
+    public T dequeue(){
        return linkedListBasedQueue.removeFirst();
     }
 
