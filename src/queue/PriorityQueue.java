@@ -31,5 +31,28 @@ public class PriorityQueue<T extends Comparable<T>>{
         heap = new ArrayList<>(heapCapacity);
     }
 
-    // contructions of a heap via heapify process
+    // contructions of a heap via heapify process ,
+    // Time Complexity O(n)
+    public PriorityQueue(T[] elements){
+        heapSize = heapCapacity = elements.length;
+        heap = new ArrayList<>(heapCapacity);
+
+        //Place all elements in Heap
+        for(int i = 0; i < heapSize ; i++){
+            mapAdd(elements[i],i);
+            heap.add(elements[i]);
+        }
+
+        //Heapify process
+        for (int i = Math.max(0,(heapSize/2 )-1; i >= 0; i--)){
+            bubbleDown(i);
+        }
+
+    }
+
+    private void bubbleDown(int position) {
+    }
+
+    private void mapAdd(T element, int i) {
+    }
 }
