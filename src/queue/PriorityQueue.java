@@ -44,7 +44,7 @@ public class PriorityQueue<T extends Comparable<T>>{
         }
 
         //Heapify process
-        for (int i = Math.max(0,(heapSize/2 )-1; i >= 0; i--)){
+        for (int i = Math.max(0,(heapSize/2 )-1); i >= 0; i--){
             bubbleDown(i);
         }
 
