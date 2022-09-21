@@ -58,6 +58,24 @@ public class PriorityQueue<T extends Comparable<T>>{
         }
     }
 
+    // returns true/false depending upon whether Priority queue is
+    // Empty
+    public boolean isEmpty(){
+        return this.heapSize == 0;
+    }
+
+    // returns size of the Priority queue
+    public int size(){
+        return heapSize;
+    }
+    // clears the whole priority Queue
+    public void clear(){
+        for (int i = 0; i < heapSize; i++) {
+            heap.set(i,null);
+        }
+        heapSize = 0;
+        positionMap.clear();
+    }
 
     private void add(T element) {
     }
