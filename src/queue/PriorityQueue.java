@@ -50,6 +50,18 @@ public class PriorityQueue<T extends Comparable<T>>{
 
     }
 
+    // Priority Queue construction O(nlogn)
+    public PriorityQueue(Collection<T> elements){
+        this(elements.size());
+        for (T element : elements){
+            add(element);
+        }
+    }
+
+
+    private void add(T element) {
+    }
+
     private void bubbleDown(int position) {
     }
 
