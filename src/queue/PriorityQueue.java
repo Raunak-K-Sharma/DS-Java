@@ -77,7 +77,67 @@ public class PriorityQueue<T extends Comparable<T>>{
         positionMap.clear();
     }
 
+    /*Returns the value of the element with the lowest priority in
+    the priority queue. If the priority queue is Empty null is
+    returned O(1)
+    * */
+    public T peek(){
+        if(this.isEmpty())
+            return null;
+        return heap.get(0);
+    }
+
+    // removes the root element O(logn)
+    public T poll(){
+        return removeAt(0);
+    }
+
+    //check if the element is in the heap O(1)
+    public boolean contains(T element){
+        if (element == null)
+            return false;
+        return positionMap.containsKey(element);
+
+        /**
+         * Linear Scan to check contains
+         *  for (int i = 0; i < heapSize; i++) {
+     *             if(heap.get(i) == element)
+     *                 return true;
+     *         }
+     *         return false;
+         */
+    }
+
+    private T removeAt(int indexToRemove) {
+        return null;
+    }
+
+    // add an element to the priority Queue, the element should not
+    // be null
     private void add(T element) {
+        if (element == null) throw new IllegalArgumentException();
+        if(this.heapSize < this.heapCapacity){
+            this.heap.set(heapSize, element);
+        }else{
+            this.heap.add(element);
+            this.heapCapacity += 1;
+        }
+        mapAdd(element,this.heapSize);
+        bubbleUp(this.heapSize);
+        
+        this.heapSize += 1;
+    }
+
+    // compares two index values i <= j
+    // assumses i,j are valid indices
+    public boolean isLesser(int i , int j){
+        T nodeOne = this.heap.get(i);
+        T nodeTwo = this.heap.get(j);
+
+        return nodeOne.compareTo(nodeTwo) <= 0 ;
+    }
+
+    private void bubbleUp(int heapSize) {
     }
 
     private void bubbleDown(int position) {
