@@ -137,6 +137,7 @@ public class PriorityQueue<T extends Comparable<T>>{
         return nodeOne.compareTo(nodeTwo) <= 0 ;
     }
 
+    // buubbles up the node to fit in appropriate position
     private void bubbleUp(int nodePosition) {
         // Grab the index to next parent node With respect to
         // nodePositon
