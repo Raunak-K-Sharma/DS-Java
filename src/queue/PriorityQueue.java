@@ -137,7 +137,23 @@ public class PriorityQueue<T extends Comparable<T>>{
         return nodeOne.compareTo(nodeTwo) <= 0 ;
     }
 
-    private void bubbleUp(int heapSize) {
+    private void bubbleUp(int nodePosition) {
+        // Grab the index to next parent node With respect to
+        // nodePositon
+        int parentIndex = (nodePosition -1) /2;
+
+        // Keep bubbling up while we are not at root or while we are
+        // lesser than parent
+        while(nodePosition > 0 && isLesser(nodePosition,parentIndex)){
+            swap(parentIndex,nodePosition);
+            nodePosition = parentIndex;
+            // Grab the next parentIndex
+            parentIndex = (nodePosition -1) /2;
+        }
+
+    }
+
+    private void swap(int parentIndex, int nodePosition) {
     }
 
     private void bubbleDown(int position) {
