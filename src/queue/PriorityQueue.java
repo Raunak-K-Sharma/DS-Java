@@ -153,6 +153,7 @@ public class PriorityQueue<T extends Comparable<T>>{
 
     }
 
+    // will swap parent and child
     private void swap(int parentIndex, int nodePosition) {
     }
 
